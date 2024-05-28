@@ -1,0 +1,35 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: integrated terminal",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "cwd": "${fileDirname}",
+            "purpose": [
+                "debug-in-terminal"
+            ],
+        },
+        {
+            "name": "streamlit debug",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "streamlit",
+            "args": [
+                "run",
+                "${file}"
+            ],
+            "cwd": "${fileDirname}",
+            "justMyCode": true,
+            "console": "integratedTerminal",
+            "purpose": [
+                "debug-in-terminal"
+            ],
+        },
+    ]
+}
