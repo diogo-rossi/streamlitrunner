@@ -75,14 +75,6 @@ class RuntimeConfig(TypedDict, total=False):
     STREAMLIT_THEME_TEXT_COLOR: str
     STREAMLIT_THEME_FONT: Literal["sans serif", "serif", "monospace"]
 
-rc: RuntimeConfig = {
-    "STREAMLIT_CLIENT_TOOLBAR_MODE": "minimal",
-    "STREAMLIT_SERVER_HEADLESS": True,
-    "STREAMLIT_SERVER_RUN_ON_SAVE": True,
-    "STREAMLIT_SERVER_PORT": 8501,
-    "STREAMLIT_THEME_BASE": "light",
-}
-
 def close_app():
     pyautogui.hotkey("ctrl", "w")
     psutil.Process(os.getpid()).terminate()
@@ -96,8 +88,8 @@ def run(
     client_toolbar_mode: Literal["auto", "developer", "viewer", "minimal"] = "minimal",
     theme_base: Literal["dark", "light"] = "light",
     server_port: int = 8501,
-    server_headless: bool = True,
     server_run_on_save: bool = True,
+    server_headless: bool = ...,
     global_disable_watchdog_warning: bool = ...,
     global_disable_widget_state_duplication_warning: bool = ...,
     global_show_warning_on_direct_execution: bool = ...,

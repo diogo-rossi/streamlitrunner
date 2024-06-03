@@ -1,5 +1,6 @@
 import os
 import sys
+import warnings
 from pathlib import Path
 from typing import Literal, TypedDict, overload
 
@@ -83,11 +84,14 @@ rc: RuntimeConfig = {
     "CLOSE_OPENED_WINDOW": True,
     "PRINT_COMMAND": True,
     "STREAMLIT_CLIENT_TOOLBAR_MODE": "minimal",
-    "STREAMLIT_SERVER_HEADLESS": True,
     "STREAMLIT_SERVER_RUN_ON_SAVE": True,
     "STREAMLIT_SERVER_PORT": 8501,
     "STREAMLIT_THEME_BASE": "light",
 }
+
+for key in rc:
+    if key.startswith("STREAMLIT_") and key in os.environ:
+        rc[key] = os.environ[key]
 
 
 def close_app():
@@ -123,11 +127,12 @@ def run(
     ----------
         - `open_as_app` (`bool`, optional): Defaults to `True`.
 
-            Whether to open the browser launching the url in "application mode" with `--app=` argument (separate window)
+            Whether to open the chromium based browser launching the url in "application mode" with `--app=` argument (separate window).
+            If `True`, then the option `STREAMLIT_SERVER_HEADLESS` is set to `True`.
 
         - `browser` (`Literal["chrome", "msedge"]`, optional): Defaults to `"msedge"`.
 
-            The browser in which to run the streamlit app.
+            The chromium based browser in which to run the streamlit app.
 
         - `close_opened_window` (`bool`, optional): Defaults to `True`.
 
@@ -145,13 +150,13 @@ def run(
             Some values are predefined, if not given. Namely:
 
                 + `client_toolbar_mode` (`STREAMLIT_CLIENT_TOOLBAR_MODE`) = `"minimal"`
-                
-                + `server_headless` (`STREAMLIT_SERVER_HEADLESS`) = `True`
-                
+
+                + `server_headless` (`STREAMLIT_SERVER_HEADLESS`): `True` if `open_as_app=True`
+
                 + `server_run_on_save` (`STREAMLIT_SERVER_RUN_ON_SAVE`) = `True`
-                
+
                 + `server_port` (`STREAMLIT_SERVER_PORT`) = `8501`
-                
+
                 + `theme_base` (`STREAMLIT_THEME_BASE`) = `"light"`
 
     """
@@ -161,13 +166,24 @@ def run(
 
         specif_args = ["open_as_app", "browser", "close_opened_window", "print_command"]
 
+        if kwargs.get("open_as_app", True) and kwargs.get("browser", "msedge") not in ["chrome", "msedge"]:
+            warnings.warn("`open_as_app` option only currently supported for chromium web browsers 'chrome' and 'msedge'", Warning)
+            kwargs["open_as_app"] = False
+
+        if "STREAMLIT_SERVER_HEADLESS" not in rc:
+            if "STREAMLIT_SERVER_HEADLESS" in os.environ:
+                rc["STREAMLIT_SERVER_HEADLESS"] = bool(os.environ["STREAMLIT_SERVER_HEADLESS"])
+            else:
+                if kwargs.get("open_as_app", True):
+                    rc["STREAMLIT_SERVER_HEADLESS"] = True
+                else:
+                    rc["STREAMLIT_SERVER_HEADLESS"] = False
+
         for key in kwargs:
             rc[(key if key in specif_args else f"streamlit_{key}").upper()] = kwargs[key]
 
-        rc["STREAMLIT_SERVER_HEADLESS"] = rc["STREAMLIT_SERVER_HEADLESS"] or rc["OPEN_AS_APP"]
-
         for option in rc:
-            if option.startswith("STREAMLIT_") and option not in os.environ:
+            if option.startswith("STREAMLIT_"):
                 os.environ[option] = str(rc[option])
 
         if rc["CLOSE_OPENED_WINDOW"]:
