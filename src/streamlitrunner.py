@@ -144,15 +144,15 @@ def run(
 
             Some values are predefined, if not given. Namely:
 
-                + `client_toolbar_mode` (`STREAMLIT_CLIENT_TOOLBAR_MODE`) = "minimal"
-
-                + `server_headless` (`STREAMLIT_SERVER_HEADLESS`) = True
-
-                + `server_run_on_save` (`STREAMLIT_SERVER_RUN_ON_SAVE`) = True
-
-                + `server_port` (`STREAMLIT_SERVER_PORT`) = 8501
-
-                + `theme_base` (`STREAMLIT_THEME_BASE`) = "light"
+                + `client_toolbar_mode` (`STREAMLIT_CLIENT_TOOLBAR_MODE`) = `"minimal"`
+                
+                + `server_headless` (`STREAMLIT_SERVER_HEADLESS`) = `True`
+                
+                + `server_run_on_save` (`STREAMLIT_SERVER_RUN_ON_SAVE`) = `True`
+                
+                + `server_port` (`STREAMLIT_SERVER_PORT`) = `8501`
+                
+                + `theme_base` (`STREAMLIT_THEME_BASE`) = `"light"`
 
     """
     gettrace = getattr(sys, "gettrace", None)
