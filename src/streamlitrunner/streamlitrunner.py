@@ -7,7 +7,22 @@ from typing import Literal, TypedDict, overload
 import psutil
 import pyautogui
 import pygetwindow
+from streamlit import session_state
 from streamlit.runtime.scriptrunner import get_script_run_ctx
+
+
+class SessionState:
+    def __contains__(self, name: str) -> bool:
+        return hasattr(self, name)
+
+
+gettrace = getattr(sys, "gettrace", None)
+debugging = gettrace is not None and gettrace()
+launch_streamlit_app = not get_script_run_ctx() and not sys.flags.interactive and not sys.flags.quiet and not debugging
+
+session = SessionState()
+if launch_streamlit_app:
+    session = session_state
 
 
 class RuntimeConfig(TypedDict, total=False):
@@ -160,9 +175,7 @@ def run(
                 + `theme_base` (`STREAMLIT_THEME_BASE`) = `"light"`
 
     """
-    gettrace = getattr(sys, "gettrace", None)
-    debugging = gettrace is not None and gettrace()
-    if not get_script_run_ctx() and not sys.flags.interactive and not sys.flags.quiet and not debugging:
+    if launch_streamlit_app:
 
         specif_args = ["open_as_app", "browser", "close_opened_window", "print_command"]
 
