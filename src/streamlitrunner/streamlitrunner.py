@@ -18,10 +18,11 @@ class SessionState:
 
 gettrace = getattr(sys, "gettrace", None)
 debugging = gettrace is not None and gettrace()
-launch_streamlit_app = not get_script_run_ctx() and not sys.flags.interactive and not sys.flags.quiet and not debugging
+interactively_debugging = sys.flags.interactive or sys.flags.quiet or debugging
+inside_streamlit_app = get_script_run_ctx()
 
 session = SessionState()
-if launch_streamlit_app:
+if inside_streamlit_app:
     session = session_state
 
 
@@ -175,7 +176,7 @@ def run(
                 + `theme_base` (`STREAMLIT_THEME_BASE`) = `"light"`
 
     """
-    if launch_streamlit_app:
+    if not inside_streamlit_app and not interactively_debugging:
 
         specif_args = ["open_as_app", "browser", "close_opened_window", "print_command"]
 
