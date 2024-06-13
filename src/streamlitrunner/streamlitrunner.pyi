@@ -75,6 +75,17 @@ class RuntimeConfig(TypedDict, total=False):
     STREAMLIT_THEME_TEXT_COLOR: str
     STREAMLIT_THEME_FONT: Literal["sans serif", "serif", "monospace"]
 
+rc: RuntimeConfig = {
+    "OPEN_AS_APP": True,
+    "BROWSER": "msedge",
+    "CLOSE_OPENED_WINDOW": True,
+    "PRINT_COMMAND": True,
+    "STREAMLIT_CLIENT_TOOLBAR_MODE": "minimal",
+    "STREAMLIT_SERVER_RUN_ON_SAVE": True,
+    "STREAMLIT_SERVER_PORT": 8501,
+    "STREAMLIT_THEME_BASE": "light",
+}
+
 def close_app():
     pyautogui.hotkey("ctrl", "w")
     psutil.Process(os.getpid()).terminate()

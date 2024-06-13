@@ -133,7 +133,7 @@ def run(**kwargs): ...
 def run(
     **kwargs,
 ):
-    """Run the file as a streamlit app and exits.
+    """Run the script file as a streamlit app and exits.
 
     Executes the command `streamlit run <script.py>` before exit the program.
 
@@ -144,7 +144,7 @@ def run(
         - `open_as_app` (`bool`, optional): Defaults to `True`.
 
             Whether to open the chromium based browser launching the url in "application mode" with `--app=` argument (separate window).
-            If `True`, then the option `STREAMLIT_SERVER_HEADLESS` is set to `True`.
+            If `True`, the option `STREAMLIT_SERVER_HEADLESS` is set to `True`.
 
         - `browser` (`Literal["chrome", "msedge"]`, optional): Defaults to `"msedge"`.
 
@@ -178,10 +178,8 @@ def run(
     """
     if not inside_streamlit_app and not interactively_debugging:
 
-        specif_args = ["open_as_app", "browser", "close_opened_window", "print_command"]
-
         if kwargs.get("open_as_app", True) and kwargs.get("browser", "msedge") not in ["chrome", "msedge"]:
-            warnings.warn("`open_as_app` option only currently supported for chromium web browsers 'chrome' and 'msedge'", Warning)
+            warnings.warn("`open_as_app` option only currently supported for chromium web browsers: 'chrome' and 'msedge'", Warning)
             kwargs["open_as_app"] = False
 
         if "STREAMLIT_SERVER_HEADLESS" not in rc:
@@ -193,14 +191,23 @@ def run(
                 else:
                     rc["STREAMLIT_SERVER_HEADLESS"] = False
 
+        spec_args = ["open_as_app", "browser", "close_opened_window", "print_command"]
+
         for key in kwargs:
-            rc[(key if key in specif_args else f"streamlit_{key}").upper()] = kwargs[key]
+            rc[(key if key in spec_args else f"streamlit_{key}").upper()] = kwargs[key]
 
         for option in rc:
             if option.startswith("STREAMLIT_"):
                 os.environ[option] = str(rc[option])
 
-        if rc["CLOSE_OPENED_WINDOW"]:
+        server_headless: bool = rc["STREAMLIT_SERVER_HEADLESS"]
+        close_opened_window: bool = rc.get("CLOSE_OPENED_WINDOW", True)
+        print_command: bool = rc.get("PRINT_COMMAND", True)
+        open_as_app: bool = rc.get("OPEN_AS_APP", True)
+        browser: str = rc.get("BROWSER", "msedge")
+        server_port: int = rc.get("STREAMLIT_SERVER_PORT", 8501)
+
+        if close_opened_window:
             windows1 = pygetwindow.getWindowsWithTitle("streamlit")
             windows2 = pygetwindow.getWindowsWithTitle(Path(sys.argv[0]).stem)
             for window in windows1:
@@ -209,15 +216,15 @@ def run(
 
         print()
 
-        if rc["OPEN_AS_APP"]:
-            command = f'start {rc["BROWSER"]} --app=http://localhost:{rc["STREAMLIT_SERVER_PORT"]}/'
-            if rc["PRINT_COMMAND"]:
+        if open_as_app:
+            command = f"start {browser} --app=http://localhost:{server_port}/"
+            if print_command:
                 print(command)
             os.system(command)
 
         try:
-            command = f'streamlit run --server.headless {rc["STREAMLIT_SERVER_HEADLESS"]} --server.port {rc["STREAMLIT_SERVER_PORT"]} {sys.argv[0]} -- {" ".join(sys.argv[1:])}'
-            if rc["PRINT_COMMAND"]:
+            command = f'streamlit run --server.headless {server_headless} --server.port {server_port} {sys.argv[0]} -- {" ".join(sys.argv[1:])}'
+            if print_command:
                 print(command)
             os.system(command)
         except KeyboardInterrupt:
