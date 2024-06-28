@@ -7,6 +7,7 @@ from typing import Literal, TypedDict, overload
 import psutil
 import pyautogui
 import pygetwindow
+import webview
 from streamlit import session_state
 from streamlit.runtime.scriptrunner import get_script_run_ctx
 
@@ -111,7 +112,7 @@ for key in rc:
 
 
 def close_app():
-    pyautogui.hotkey("ctrl", "w")
+    pyautogui.hotkey("alt", "f4")
     psutil.Process(os.getpid()).terminate()
 
 
@@ -216,17 +217,19 @@ def run(
 
         print()
 
-        if open_as_app:
-            command = f"start {browser} --app=http://localhost:{server_port}/"
+        def run_streamlit():
+            command = f'streamlit run --server.headless {server_headless} --server.port {server_port} {sys.argv[0]} -- {" ".join(sys.argv[1:])}'
             if print_command:
                 print(command)
             os.system(command)
 
         try:
-            command = f'streamlit run --server.headless {server_headless} --server.port {server_port} {sys.argv[0]} -- {" ".join(sys.argv[1:])}'
-            if print_command:
-                print(command)
-            os.system(command)
+            if open_as_app:
+                webview.create_window("Hello world", f"http://localhost:{server_port}/")
+                webview.start(run_streamlit)
+            else:
+                run_streamlit()
+
         except KeyboardInterrupt:
             sys.exit()
         sys.exit()
