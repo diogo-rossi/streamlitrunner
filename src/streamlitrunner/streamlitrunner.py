@@ -1,12 +1,8 @@
 import os
 import sys
-import warnings
 from pathlib import Path
 from typing import Literal, TypedDict, overload
 
-import psutil
-import pyautogui
-import pygetwindow
 import webview
 from streamlit import session_state
 from streamlit.runtime.scriptrunner import get_script_run_ctx
@@ -109,11 +105,6 @@ rc: RuntimeConfig = {
 for key in rc:
     if key.startswith("STREAMLIT_") and key in os.environ:
         rc[key] = os.environ[key]
-
-
-def close_app():
-    pyautogui.hotkey("alt", "f4")
-    psutil.Process(os.getpid()).terminate()
 
 
 @overload
