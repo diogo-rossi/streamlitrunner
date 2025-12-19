@@ -3,6 +3,7 @@ import sys
 import warnings
 from pathlib import Path
 from typing import Literal, TypedDict, overload
+from threading import Thread
 
 import psutil
 import pyautogui
@@ -230,7 +231,11 @@ def run(
 
         try:
             if open_as_app:
+                thread = Thread(target=run_streamlit)
+                thread.daemon = True
+                thread.start()
                 webview.create_window(title, f"http://localhost:{server_port}/", maximized=maximized)
+                webview.start()
             else:
                 run_streamlit()
 
