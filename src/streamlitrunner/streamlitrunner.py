@@ -119,6 +119,8 @@ def close_app():
 @overload
 def run(
     *,
+    title: str = "Streamlit runner app",
+    maximized: bool = True,
     open_as_app: bool = True,
     print_command: bool = True,
     **kwargs,
@@ -178,7 +180,7 @@ def run(
                 else:
                     rc["STREAMLIT_SERVER_HEADLESS"] = False
 
-        spec_args = ["open_as_app", "browser", "close_opened_window", "print_command"]
+        spec_args = ["open_as_app", "print_command", "title", "maximized"]
 
         for key in kwargs:
             rc[(key if key in spec_args else f"streamlit_{key}").upper()] = kwargs[key]
