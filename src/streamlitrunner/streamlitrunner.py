@@ -218,7 +218,10 @@ def run(
         print()
 
         def run_streamlit():
-            command = f'streamlit run --server.headless {server_headless} --server.port {server_port} {sys.argv[0]} -- {" ".join(sys.argv[1:])}'
+            streamlit = Path(sys.executable).resolve().parent / "streamlit.exe"
+            if not streamlit.exists():
+                streamlit = "streamlit"
+            command = f'{streamlit} run --server.headless {server_headless} --server.port {server_port} {sys.argv[0]} -- {" ".join(sys.argv[1:])}'
             if print_command:
                 print(command)
             os.system(command)
