@@ -207,6 +207,8 @@ def run(
         open_as_app: bool = rc.get("OPEN_AS_APP", True)
         browser: str = rc.get("BROWSER", "msedge")
         server_port: int = rc.get("STREAMLIT_SERVER_PORT", 8501)
+        maximized: bool = rc.get("MAXIMIZED", True)
+        title: str = rc.get("TITLE", "Streamlit runner app")
 
         if close_opened_window:
             windows1 = pygetwindow.getWindowsWithTitle("streamlit")
@@ -228,8 +230,7 @@ def run(
 
         try:
             if open_as_app:
-                webview.create_window("Hello world", f"http://localhost:{server_port}/")
-                webview.start(run_streamlit)
+                webview.create_window(title, f"http://localhost:{server_port}/", maximized=maximized)
             else:
                 run_streamlit()
 
