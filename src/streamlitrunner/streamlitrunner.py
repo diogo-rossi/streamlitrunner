@@ -169,10 +169,6 @@ def run(
     """
     if not inside_streamlit_app and not interactively_debugging:
 
-        if kwargs.get("open_as_app", True) and kwargs.get("browser", "msedge") not in ["chrome", "msedge"]:
-            warnings.warn("`open_as_app` option only currently supported for chromium web browsers: 'chrome' and 'msedge'", Warning)
-            kwargs["open_as_app"] = False
-
         if "STREAMLIT_SERVER_HEADLESS" not in rc:
             if "STREAMLIT_SERVER_HEADLESS" in os.environ:
                 rc["STREAMLIT_SERVER_HEADLESS"] = bool(os.environ["STREAMLIT_SERVER_HEADLESS"])
