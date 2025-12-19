@@ -120,8 +120,6 @@ def close_app():
 def run(
     *,
     open_as_app: bool = True,
-    browser: Literal["chrome", "msedge"] = "msedge",
-    close_opened_window: bool = True,
     print_command: bool = True,
     **kwargs,
 ): ...
@@ -202,22 +200,11 @@ def run(
                 os.environ[option] = str(rc[option])
 
         server_headless: bool = rc["STREAMLIT_SERVER_HEADLESS"]
-        close_opened_window: bool = rc.get("CLOSE_OPENED_WINDOW", True)
         print_command: bool = rc.get("PRINT_COMMAND", True)
         open_as_app: bool = rc.get("OPEN_AS_APP", True)
-        browser: str = rc.get("BROWSER", "msedge")
         server_port: int = rc.get("STREAMLIT_SERVER_PORT", 8501)
         maximized: bool = rc.get("MAXIMIZED", True)
         title: str = rc.get("TITLE", "Streamlit runner app")
-
-        if close_opened_window:
-            windows1 = pygetwindow.getWindowsWithTitle("streamlit")
-            windows2 = pygetwindow.getWindowsWithTitle(Path(sys.argv[0]).stem)
-            for window in windows1:
-                if window in windows2 and " Streamlit" in window.title:
-                    window.close()
-
-        print()
 
         def run_streamlit():
             streamlit = Path(sys.executable).resolve().parent / "streamlit.exe"
