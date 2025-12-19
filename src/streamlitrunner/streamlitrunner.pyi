@@ -93,8 +93,6 @@ def close_app():
 def run(
     *,
     open_as_app: bool = True,
-    browser: Literal["chrome", "msedge"] = "msedge",
-    close_opened_window: bool = True,
     print_command: bool = True,
     client_toolbar_mode: Literal["auto", "developer", "viewer", "minimal"] = "minimal",
     theme_base: Literal["dark", "light"] = "light",
