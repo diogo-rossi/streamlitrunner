@@ -145,14 +145,6 @@ def run(
             Whether to open the chromium based browser launching the url in "application mode" with `--app=` argument (separate window).
             If `True`, the option `STREAMLIT_SERVER_HEADLESS` is set to `True`.
 
-        - `browser` (`Literal["chrome", "msedge"]`, optional): Defaults to `"msedge"`.
-
-            The chromium based browser in which to run the streamlit app.
-
-        - `close_opened_window` (`bool`, optional): Defaults to `True`.
-
-            Whether to close a previously opened browser window with the same streamlit app name.
-
         - `print_command` (`bool`, optional): Defaults to `True`.
 
             Whether to print the command executed by this function.
