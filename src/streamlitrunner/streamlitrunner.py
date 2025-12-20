@@ -134,32 +134,31 @@ def run(
 
     Parameters
     ----------
-        - `open_as_app` (`bool`, optional): Defaults to `True`.
+    - `open_as_app` (`bool`, optional): Defaults to `True`.
 
-            Whether to open the chromium based browser launching the url in "application mode" with `--app=` argument (separate window).
-            If `True`, the option `STREAMLIT_SERVER_HEADLESS` is set to `True`.
+        Whether to open the chromium based browser launching the url in "application mode" with `--app=` argument (separate window).
+        If `True`, the option `STREAMLIT_SERVER_HEADLESS` is set to `True`.
 
-        - `print_command` (`bool`, optional): Defaults to `True`.
+    - `print_command` (`bool`, optional): Defaults to `True`.
 
-            Whether to print the command executed by this function.
+        Whether to print the command executed by this function.
 
-        - `**kwargs`: Additional keyword arguments passed as options to the `streamlit run` command.
+    - `**kwargs`: Additional keyword arguments passed as options to the `streamlit run` command.
 
-            These keyword arguments have the same names as the environment variables, but passed with
-            lower case and without the prefix `streamlit_`. Use `streamlit run --help` to get a list.
+        These keyword arguments have the same names as the environment variables, but passed with
+        lower case and without the prefix `streamlit_`. Use `streamlit run --help` to get a list.
 
-            Some values are predefined, if not given. Namely:
+        Some values are predefined, if not given. Namely:
 
-                + `client_toolbar_mode` (`STREAMLIT_CLIENT_TOOLBAR_MODE`) = `"minimal"`
+            + `client_toolbar_mode` (`STREAMLIT_CLIENT_TOOLBAR_MODE`) = `"minimal"`
 
-                + `server_headless` (`STREAMLIT_SERVER_HEADLESS`): `True` if `open_as_app=True`
+            + `server_headless` (`STREAMLIT_SERVER_HEADLESS`): `True` if `open_as_app=True`
 
-                + `server_run_on_save` (`STREAMLIT_SERVER_RUN_ON_SAVE`) = `True`
+            + `server_run_on_save` (`STREAMLIT_SERVER_RUN_ON_SAVE`) = `True`
 
-                + `server_port` (`STREAMLIT_SERVER_PORT`) = `8501`
+            + `server_port` (`STREAMLIT_SERVER_PORT`) = `8501`
 
-                + `theme_base` (`STREAMLIT_THEME_BASE`) = `"light"`
-
+            + `theme_base` (`STREAMLIT_THEME_BASE`) = `"light"`
     """
     if not inside_streamlit_app and not interactively_debugging:
 
