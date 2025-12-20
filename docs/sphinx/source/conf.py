@@ -6,8 +6,12 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
+from datetime import datetime
+
+thisyear = str(datetime.now().year)
+
 project = "streamlitrunner"
-copyright = "2024, Diogo Rossi"
+copyright = f"{thisyear}, Diogo Rossi"
 author = "Diogo Rossi"
 
 import os
