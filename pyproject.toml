@@ -1,7 +1,7 @@
 [project]
 name = "streamlitrunner"
 version = "0.0.0"
-description = "A library to run streamlit apps as local apps"
+description = "A module to run streamlit apps as local apps"
 readme = "README.md"
 authors = [
     { name = "Diogo Rossi", email = "rossi.diogo@gmail.com" },
