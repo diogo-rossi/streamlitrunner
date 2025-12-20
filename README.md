@@ -26,4 +26,6 @@ if __name__ == '__main__':
     sr.run()
 ```
 
-Now you can only call `python my_app.py` and it will work!
+Now you can only call `python my_app.py` and it will work as a desktop app!
+
+![](docs/streamlitrunner-example.png)
