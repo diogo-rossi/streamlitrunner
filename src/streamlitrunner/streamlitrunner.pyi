@@ -3,9 +3,6 @@ import sys
 from pathlib import Path
 from typing import Literal, TypedDict, overload
 
-import psutil
-import pyautogui
-import pygetwindow
 from streamlit.runtime.scriptrunner import get_script_run_ctx
 
 class RuntimeConfig(TypedDict, total=False):
@@ -85,10 +82,6 @@ rc: RuntimeConfig = {
     "STREAMLIT_SERVER_PORT": 8501,
     "STREAMLIT_THEME_BASE": "light",
 }
-
-def close_app():
-    pyautogui.hotkey("ctrl", "w")
-    psutil.Process(os.getpid()).terminate()
 
 def run(
     *,
