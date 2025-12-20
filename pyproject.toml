@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "streamlitrunner"
-version = "0.0.0"
+version = "0.0.1"
 description = "A module to run streamlit apps as local apps"
 readme = "README.md"
 authors = [
@@ -22,7 +22,7 @@ classifiers = [
 ]
 
 [project.urls]
-Documentation = "https://github.com/diogo-rossi/streamlitrunner"
+Documentation = "https://streamlitrunner.readthedocs.io/en/latest/"
 Issues = "https://github.com/diogo-rossi/streamlitrunner/issues"
 Source = "https://github.com/diogo-rossi/streamlitrunner"
 
