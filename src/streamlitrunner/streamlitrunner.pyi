@@ -88,6 +88,7 @@ def run(
     open_as_app: bool = True,
     print_command: bool = True,
     client_toolbar_mode: Literal["auto", "developer", "viewer", "minimal"] = "minimal",
+    fill_page_content: bool = False,
     theme_base: Literal["dark", "light"] = "light",
     server_port: int = 8501,
     server_run_on_save: bool = True,
@@ -148,4 +149,9 @@ def run(
     theme_secondary_background_color: str = ...,
     theme_text_color: str = ...,
     theme_font: Literal["sans serif", "serif", "monospace"] = ...,
+) -> None: ...
+def fill_page_content(
+    remove_pad: bool = True,
+    remove_header_footer: bool = True,
+    wide_layout: bool = True,
 ) -> None: ...
