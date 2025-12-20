@@ -2,11 +2,40 @@ import os
 import sys
 from pathlib import Path
 from typing import Literal, TypedDict, overload
-from threading import Thread
 
+import subprocess
 import webview
+import psutil
+import socket
 from streamlit import session_state
 from streamlit.runtime.scriptrunner import get_script_run_ctx
+
+
+def get_free_port() -> int:
+    """Returns the number of a free port"""
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.bind(("localhost", 0))
+    port = sock.getsockname()[1]
+    sock.close()
+    return port
+
+
+def is_port_in_use(port) -> bool:
+    """Checks if given port is used"""
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        return s.connect_ex(("localhost", port)) == 0
+
+
+def kill_streamlit(proc):
+    """Kill given streamlit process"""
+    try:
+        process = psutil.Process(proc.pid)
+        for child in process.children(recursive=True):
+            child.kill()
+        process.kill()
+        print("App closed")
+    except:
+        raise
 
 
 class SessionState:
