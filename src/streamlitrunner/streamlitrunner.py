@@ -212,3 +212,38 @@ def run(
         except KeyboardInterrupt:
             sys.exit()
         sys.exit()
+
+
+def fill_page_content():
+    """Set streamlit page filling it removing all empty spaces"""
+
+    import streamlit as st
+
+    st.markdown(
+        """
+    <style>
+        .block-container {
+            padding-top: 0rem;
+        }
+    </style>
+    """,
+        unsafe_allow_html=True,
+    )
+
+    st.markdown(
+        """
+    <style>
+        header {visibility: hidden;}
+        footer {visibility: hidden;}
+
+        /* Remove top padding from main container */
+        .block-container {
+            padding-top: 0rem;
+            padding-bottom: 0rem;
+        }
+    </style>
+    """,
+        unsafe_allow_html=True,
+    )
+
+    st.set_page_config(layout="wide")
