@@ -115,6 +115,7 @@ def run(
     maximized: bool = True,
     open_as_app: bool = True,
     print_command: bool = True,
+    fill_page_content: bool = False,
     **kwargs,
 ): ...
 
@@ -163,6 +164,10 @@ def run(
 
         + `theme_base` (`STREAMLIT_THEME_BASE`) = `"light"`
     """
+
+    if kwargs.get("fill_page_content", False):
+        fill_page_content(True, True, True)
+
     if not inside_streamlit_app and not interactively_debugging:
 
         if "STREAMLIT_SERVER_HEADLESS" not in rc:
