@@ -224,22 +224,30 @@ def run(
         maximized: bool = rc.get("MAXIMIZED", True)
         title: str = rc.get("TITLE", "Streamlit runner app")
 
+        if is_port_in_use(server_port):
+            server_port = get_free_port()
+
         def run_streamlit():
+            global proc
             streamlit = Path(sys.executable).resolve().parent / "streamlit.exe"
             if not streamlit.exists():
                 streamlit = "streamlit"
             command = f'{streamlit} run --server.headless {server_headless} --server.port {server_port} {sys.argv[0]} -- {" ".join(sys.argv[1:])}'
+
             if print_command:
+                COLUMNS = os.get_terminal_size().columns
+                print("-" * COLUMNS)
+                print("Running command:")
                 print(command)
-            os.system(command)
+                print("-" * COLUMNS)
+
+            proc = subprocess.Popen(command.split())
 
         try:
             if open_as_app:
-                thread = Thread(target=run_streamlit)
-                thread.daemon = True
-                thread.start()
                 webview.create_window(title, f"http://localhost:{server_port}/", maximized=maximized)
-                webview.start()
+                webview.start(run_streamlit)
+                kill_streamlit(proc)
             else:
                 run_streamlit()
 
