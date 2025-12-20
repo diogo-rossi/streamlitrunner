@@ -214,36 +214,44 @@ def run(
         sys.exit()
 
 
-def fill_page_content():
+def fill_page_content(
+    remove_pad: bool = True,
+    remove_header_footer: bool = True,
+    wide_layout: bool = True,
+) -> None:
     """Set streamlit page filling it removing all empty spaces"""
 
     import streamlit as st
 
-    st.markdown(
-        """
-    <style>
-        .block-container {
-            padding-top: 0rem;
-        }
-    </style>
-    """,
-        unsafe_allow_html=True,
-    )
+    if remove_pad:
 
-    st.markdown(
-        """
-    <style>
-        header {visibility: hidden;}
-        footer {visibility: hidden;}
+        st.markdown(
+            """
+        <style>
+            .block-container {
+                padding-top: 0rem;
+            }
+        </style>
+        """,
+            unsafe_allow_html=True,
+        )
 
-        /* Remove top padding from main container */
-        .block-container {
-            padding-top: 0rem;
-            padding-bottom: 0rem;
-        }
-    </style>
-    """,
-        unsafe_allow_html=True,
-    )
+    if remove_header_footer:
+        st.markdown(
+            """
+        <style>
+            header {visibility: hidden;}
+            footer {visibility: hidden;}
 
-    st.set_page_config(layout="wide")
+            /* Remove top padding from main container */
+            .block-container {
+                padding-top: 0rem;
+                padding-bottom: 0rem;
+            }
+        </style>
+        """,
+            unsafe_allow_html=True,
+        )
+
+    if wide_layout:
+        st.set_page_config(layout="wide")
