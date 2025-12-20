@@ -2,6 +2,7 @@ import os
 import sys
 from pathlib import Path
 from typing import Literal, TypedDict, overload
+from threading import Thread
 
 import webview
 from streamlit import session_state
@@ -198,8 +199,11 @@ def run(
 
         try:
             if open_as_app:
+                thread = Thread(target=run_streamlit)
+                thread.daemon = True
+                thread.start()
                 webview.create_window(title, f"http://localhost:{server_port}/", maximized=maximized)
-                webview.start(run_streamlit)
+                webview.start()
             else:
                 run_streamlit()
 
