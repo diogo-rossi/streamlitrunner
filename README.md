@@ -29,3 +29,7 @@ if __name__ == '__main__':
 Now you can only call `python my_app.py` and it will work as a desktop app!
 
 ![](docs/streamlitrunner-example.png)
+
+## Documentation:
+
+[https://streamlitrunner.readthedocs.io/en/latest/](https://streamlitrunner.readthedocs.io/en/latest/)

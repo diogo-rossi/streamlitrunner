@@ -40,4 +40,4 @@ API_reference
 - PyPI:
   [https://pypi.org/project/streamlitrunner/](https://pypi.org/project/streamlitrunner/)
 - Documentation:
-  [https://streamlitrunner.readthedocs.io/en/latest/](https://streamlitrunner.readthedocs.io/en/latest/)F
+  [https://streamlitrunner.readthedocs.io/en/latest/](https://streamlitrunner.readthedocs.io/en/latest/)
