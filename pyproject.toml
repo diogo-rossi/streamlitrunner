@@ -1,0 +1,17 @@
+[project]
+name = "streamlitrunner"
+version = "0.0.0"
+description = "A library to run streamlit apps as local apps"
+readme = "README.md"
+authors = [
+    { name = "Diogo Rossi", email = "rossi.diogo@gmail.com" }
+]
+requires-python = ">=3.10"
+dependencies = [
+    "pywebview>=6.1",
+    "streamlit>=1.52.2",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
