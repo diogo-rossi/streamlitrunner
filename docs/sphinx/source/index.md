@@ -34,6 +34,10 @@ Now you can only call `python my_app.py` and it will work as a desktop app!
 :maxdepth: 1
 API_reference
 ```
-- GitHub repository: ...
-- PyPI: ...
-- Documentation: ...
+
+- GitHub repository:
+  [https://github.com/diogo-rossi/streamlitrunner](https://github.com/diogo-rossi/streamlitrunner)
+- PyPI:
+  [https://pypi.org/project/streamlitrunner/](https://pypi.org/project/streamlitrunner/)
+- Documentation:
+  [https://streamlitrunner.readthedocs.io/en/latest/](https://streamlitrunner.readthedocs.io/en/latest/)F
