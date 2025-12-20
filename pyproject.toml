@@ -1,3 +1,7 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
 [project]
 name = "streamlitrunner"
 version = "0.0.0"
@@ -11,10 +15,16 @@ dependencies = [
     "pywebview>=6.1",
     "streamlit>=1.52.2",
 ]
+classifiers = [
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+]
 
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+[project.urls]
+Documentation = "https://github.com/diogo-rossi/streamlitrunner"
+Issues = "https://github.com/diogo-rossi/streamlitrunner/issues"
+Source = "https://github.com/diogo-rossi/streamlitrunner"
 
 [dependency-groups]
 docs = [
@@ -28,6 +38,9 @@ dev = [
     "pytest>=9.0.2",
     "taskipy>=1.14.1",
 ]
+
+[tool.pytest.ini_options]
+addopts = "-rx -vv -s --tb=short"
 
 [tool.taskipy.tasks]
 docs = { cmd = "make html", cwd = "./docs/sphinx", help = "Make docs with sphinx" }
