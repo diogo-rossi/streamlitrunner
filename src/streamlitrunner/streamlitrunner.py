@@ -187,7 +187,7 @@ def run(
         The screen number to display the window on, if `open_as_app=True`.
 
     - `**kwargs`: Additional keyword arguments passed as options to the `streamlit run`
-      command.
+        command.
         These keyword arguments have the same names as the environment variables, but
         passed with lower case and without the prefix `streamlit_`. Use `streamlit run
         --help` to get a list.
