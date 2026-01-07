@@ -1,7 +1,7 @@
 import os
 import sys
 from pathlib import Path
-from typing import Literal, TypedDict, overload
+from typing import Literal, TypedDict, overload, Any, Callable, Sequence
 
 from streamlit.runtime.scriptrunner import get_script_run_ctx
 
@@ -82,6 +82,9 @@ rc: RuntimeConfig = {
 }
 
 def run(
+    func: Callable[..., Any] | None = None,
+    funcargs: Sequence[Any] | None = None,
+    funckwargs: dict[str, Any] | None = None,
     *,
     title: str = "Streamlit runner app",
     maximized: bool = True,
@@ -150,7 +153,7 @@ def run(
     theme_secondary_background_color: str = ...,
     theme_text_color: str = ...,
     theme_font: Literal["sans serif", "serif", "monospace"] = ...,
-) -> None: ...
+) -> Any | None: ...
 def fill_page_content(
     remove_pad: bool = True,
     remove_header_footer: bool = True,
