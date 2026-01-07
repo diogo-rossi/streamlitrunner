@@ -185,6 +185,9 @@ def run(
     - `fill_page_content` (`bool`, optional): Defaults to `False`.
         Whether to fill the web page removing empty spaces.
 
+    - `screen` (`int | None`, optional): Defaults to `None`.
+        The screen number to display the window on, if `open_as_app=True`.
+
     - `**kwargs`: Additional keyword arguments passed as options to the `streamlit run`
       command.
         These keyword arguments have the same names as the environment variables, but
