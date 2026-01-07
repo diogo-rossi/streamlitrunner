@@ -285,7 +285,6 @@ def fill_page_content(
         st.markdown(
             """
         <style>
-            header {visibility: hidden;}
             footer {visibility: hidden;}
 
             /* Remove top padding from main container */
