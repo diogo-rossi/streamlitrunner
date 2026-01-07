@@ -174,7 +174,7 @@ def run(
         Whether or not to start the window maximized.
 
     - `open_as_app` (`bool`, optional): Defaults to `True`.
-        Whether to open the chromium based browser launching the url in "application mode" with `--app=` argument (separate window).
+        Whether to open the browser with webview launching the url in "application mode" in its own native window (separate window).
         If `True`, the option `STREAMLIT_SERVER_HEADLESS` is set to `True`.
 
     - `print_command` (`bool`, optional): Defaults to `True`.
