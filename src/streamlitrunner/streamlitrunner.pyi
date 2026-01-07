@@ -83,6 +83,8 @@ rc: RuntimeConfig = {
 
 def run(
     *,
+    title: str = "Streamlit runner app",
+    maximized: bool = True,
     open_as_app: bool = True,
     print_command: bool = True,
     client_toolbar_mode: Literal["auto", "developer", "viewer", "minimal"] = "minimal",
