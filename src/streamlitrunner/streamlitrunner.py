@@ -235,7 +235,7 @@ def run(
             streamlit = Path(sys.executable).resolve().parent / "streamlit.exe"
             if not streamlit.exists():
                 streamlit = "streamlit"
-            command = f'{streamlit} run --server.headless {server_headless} --server.port {server_port} "{sys.argv[0]}" -- {" ".join(sys.argv[1:])}'
+            command = f'{streamlit} run --server.headless {server_headless} --server.port {server_port} "{Path(sys.argv[0])}" -- {" ".join(sys.argv[1:])}'
 
             if print_command:
                 COLUMNS = os.get_terminal_size().columns
@@ -244,7 +244,7 @@ def run(
                 print(command)
                 print("-" * COLUMNS)
 
-            proc = subprocess.Popen(command.split())
+            proc = subprocess.Popen(command)
 
         try:
             if open_as_app:
