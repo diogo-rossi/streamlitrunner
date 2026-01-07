@@ -1,7 +1,7 @@
 import os
 import sys
 from pathlib import Path
-from typing import Literal, TypedDict, overload
+from typing import Literal, TypedDict, overload, Callable, Any, Sequence
 
 import subprocess
 import webview
@@ -139,6 +139,9 @@ for key in rc:
 
 @overload
 def run(
+    func: Callable[..., Any] | None = None,
+    funcargs: Sequence[Any] | None = None,
+    funckwargs: dict[str, Any] | None = None,
     *,
     title: str = "Streamlit runner app",
     maximized: bool = True,
@@ -147,16 +150,19 @@ def run(
     fill_page_content: bool = False,
     screen: int | None = None,
     **kwargs,
-): ...
+) -> Any | None: ...
 
 
 @overload
-def run(**kwargs): ...
+def run(**kwargs) -> Any | None: ...
 
 
 def run(
+    func: Callable[..., Any] | None = None,
+    funcargs: Sequence[Any] | None = None,
+    funckwargs: dict[str, Any] | None = None,
     **kwargs,
-):
+) -> Any | None:
     """Run the script file as a streamlit app and exits.
 
     Executes the command `streamlit run <script.py>` before exit the program.
@@ -277,6 +283,13 @@ def run(
         except KeyboardInterrupt:
             sys.exit()
         sys.exit()
+
+    if func is not None:
+        funcargs = funcargs or []
+        funckwargs = funckwargs or {}
+        return func(*funcargs, **funckwargs)
+
+    return None
 
 
 def fill_page_content(
