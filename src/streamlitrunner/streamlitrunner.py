@@ -46,7 +46,7 @@ class SessionState:
 gettrace = getattr(sys, "gettrace", None)
 debugging = gettrace is not None and gettrace()
 interactively_debugging = sys.flags.interactive or sys.flags.quiet or debugging
-inside_streamlit_app = get_script_run_ctx()
+inside_streamlit_app = get_script_run_ctx(suppress_warning=True)
 
 session = SessionState()
 if inside_streamlit_app:
