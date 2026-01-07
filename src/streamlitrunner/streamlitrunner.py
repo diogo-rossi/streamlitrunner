@@ -207,7 +207,9 @@ def run(
 
         if "STREAMLIT_SERVER_HEADLESS" not in rc:
             if "STREAMLIT_SERVER_HEADLESS" in os.environ:
-                rc["STREAMLIT_SERVER_HEADLESS"] = bool(os.environ["STREAMLIT_SERVER_HEADLESS"])
+                rc["STREAMLIT_SERVER_HEADLESS"] = bool(
+                    os.environ["STREAMLIT_SERVER_HEADLESS"]
+                )
             else:
                 if kwargs.get("open_as_app", True):
                     rc["STREAMLIT_SERVER_HEADLESS"] = True
@@ -252,8 +254,15 @@ def run(
 
         try:
             if open_as_app:
-                create_window_kwargs = {"screen": webview.screens[screen]} if screen is not None else {}
-                webview.create_window(title, f"http://localhost:{server_port}/", maximized=maximized, **create_window_kwargs)
+                create_window_kwargs = (
+                    {"screen": webview.screens[screen]} if screen is not None else {}
+                )
+                webview.create_window(
+                    title,
+                    f"http://localhost:{server_port}/",
+                    maximized=maximized,
+                    **create_window_kwargs,
+                )
                 webview.start(run_streamlit)
                 kill_streamlit(proc)
             else:
