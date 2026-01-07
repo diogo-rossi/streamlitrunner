@@ -8,7 +8,6 @@ from streamlit.runtime.scriptrunner import get_script_run_ctx
 class RuntimeConfig(TypedDict, total=False):
     CLOSE_OPENED_WINDOW: bool
     OPEN_AS_APP: bool
-    BROWSER: Literal["chrome", "msedge"]
     PRINT_COMMAND: bool
     STREAMLIT_GLOBAL_DISABLE_WATCHDOG_WARNING: bool
     STREAMLIT_GLOBAL_DISABLE_WIDGET_STATE_DUPLICATION_WARNING: bool
@@ -74,7 +73,6 @@ class RuntimeConfig(TypedDict, total=False):
 
 rc: RuntimeConfig = {
     "OPEN_AS_APP": True,
-    "BROWSER": "msedge",
     "CLOSE_OPENED_WINDOW": True,
     "PRINT_COMMAND": True,
     "STREAMLIT_CLIENT_TOOLBAR_MODE": "minimal",

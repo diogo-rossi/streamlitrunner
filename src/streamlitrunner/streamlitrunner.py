@@ -56,7 +56,6 @@ if inside_streamlit_app:
 class RuntimeConfig(TypedDict, total=False):
     CLOSE_OPENED_WINDOW: bool
     OPEN_AS_APP: bool
-    BROWSER: Literal["chrome", "msedge"]
     PRINT_COMMAND: bool
     SCREEN: int | None
     STREAMLIT_GLOBAL_DISABLE_WATCHDOG_WARNING: bool
@@ -124,7 +123,6 @@ class RuntimeConfig(TypedDict, total=False):
 
 rc: RuntimeConfig = {
     "OPEN_AS_APP": True,
-    "BROWSER": "msedge",
     "CLOSE_OPENED_WINDOW": True,
     "PRINT_COMMAND": True,
     "SCREEN": None,
