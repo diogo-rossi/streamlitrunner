@@ -58,6 +58,7 @@ class RuntimeConfig(TypedDict, total=False):
     OPEN_AS_APP: bool
     BROWSER: Literal["chrome", "msedge"]
     PRINT_COMMAND: bool
+    SCREEN: int | None
     STREAMLIT_GLOBAL_DISABLE_WATCHDOG_WARNING: bool
     STREAMLIT_GLOBAL_DISABLE_WIDGET_STATE_DUPLICATION_WARNING: bool
     STREAMLIT_GLOBAL_SHOW_WARNING_ON_DIRECT_EXECUTION: bool
@@ -126,6 +127,7 @@ rc: RuntimeConfig = {
     "BROWSER": "msedge",
     "CLOSE_OPENED_WINDOW": True,
     "PRINT_COMMAND": True,
+    "SCREEN": None,
     "STREAMLIT_CLIENT_TOOLBAR_MODE": "minimal",
     "STREAMLIT_SERVER_RUN_ON_SAVE": True,
     "STREAMLIT_SERVER_PORT": 8501,
@@ -145,6 +147,7 @@ def run(
     open_as_app: bool = True,
     print_command: bool = True,
     fill_page_content: bool = False,
+    screen: int | None = None,
     **kwargs,
 ): ...
 
@@ -211,7 +214,7 @@ def run(
                 else:
                     rc["STREAMLIT_SERVER_HEADLESS"] = False
 
-        spec_args = ["open_as_app", "print_command", "title", "maximized"]
+        spec_args = ["open_as_app", "print_command", "title", "maximized", "screen"]
 
         for key in kwargs:
             rc[(key if key in spec_args else f"streamlit_{key}").upper()] = kwargs[key]
@@ -226,6 +229,7 @@ def run(
         server_port: int = rc.get("STREAMLIT_SERVER_PORT", 8501)
         maximized: bool = rc.get("MAXIMIZED", True)
         title: str = rc.get("TITLE", "Streamlit runner app")
+        screen: int | None = rc.get("SCREEN", None)
 
         if is_port_in_use(server_port):
             server_port = get_free_port()
@@ -248,7 +252,8 @@ def run(
 
         try:
             if open_as_app:
-                webview.create_window(title, f"http://localhost:{server_port}/", maximized=maximized)
+                create_window_kwargs = {"screen": webview.screens[screen]} if screen is not None else {}
+                webview.create_window(title, f"http://localhost:{server_port}/", maximized=maximized, **create_window_kwargs)
                 webview.start(run_streamlit)
                 kill_streamlit(proc)
             else:

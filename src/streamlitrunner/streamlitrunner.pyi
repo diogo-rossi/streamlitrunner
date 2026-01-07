@@ -89,6 +89,7 @@ def run(
     print_command: bool = True,
     client_toolbar_mode: Literal["auto", "developer", "viewer", "minimal"] = "minimal",
     fill_page_content: bool = False,
+    screen: int | None = None,
     theme_base: Literal["dark", "light"] = "light",
     server_port: int = 8501,
     server_run_on_save: bool = True,
