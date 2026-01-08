@@ -177,6 +177,15 @@ def run(
 
     Parameters
     ----------
+    - `func` (`Callable[..., Any] | None`, optional): Defaults to `None`.
+        A function to run.
+
+    - `funcargs` (`Sequence[Any] | None`, optional): Defaults to `None`.
+        Positional arguments passed to function `func`.
+
+    - `funckwargs` (`dict[str, Any] | None`, optional): Defaults to `None`.
+        Keyword arguments passed to function `func`.
+
     - `title` (`str`, optional): Defaults to `"Streamlit runner app"`.
         The title of the new window.
 
@@ -188,8 +197,8 @@ def run(
         in its own native window (separate window). If `True`, the option
         `STREAMLIT_SERVER_HEADLESS` is set to `True`.
 
-    - `print_command` (`bool`, optional): Defaults to `True`.
-        Whether to print the command executed by this function.
+    - `print_msgs` (`bool`, optional): Defaults to `True`.
+        Whether to print the command executed by this function and other messages.
 
     - `fill_page_content` (`bool`, optional): Defaults to `False`.
         Whether to fill the web page removing empty spaces.
@@ -214,6 +223,11 @@ def run(
         + `server_port` (`STREAMLIT_SERVER_PORT`) = `8501`
 
         + `theme_base` (`STREAMLIT_THEME_BASE`) = `"light"`
+
+    Returns
+    -------
+    `Any | None`:
+        If `func` is not `None`, return its result. Otherwise, returns `None`.
     """
 
     if kwargs.get("fill_page_content", False):

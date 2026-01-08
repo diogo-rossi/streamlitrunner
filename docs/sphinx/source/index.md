@@ -17,14 +17,20 @@ Import `streamlitrunner` and call `run()`
 import streamlitrunner as sr
 import streamlit as st
 
-st.title("Hello World!")
-st.write("This is a simple text example.")
+def main():
+    st.title("Hello World!")
+    st.write("This is a simple text example.")
 
 if __name__ == '__main__':
     sr.run()
+    main()
 ```
 
 Now you can only call `python my_app.py` and it will work as a desktop app!
+
+```{Note}:
+To prevent `streamlit` warnings, call `run()` before any `st` call, as above.
+```
 
 ![](../../streamlitrunner-example.png)
 
