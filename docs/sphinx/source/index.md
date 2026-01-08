@@ -28,7 +28,7 @@ if __name__ == '__main__':
 
 Now you can only call `python my_app.py` and it will work as a desktop app!
 
-```{Note}:
+```{note}
 To prevent `streamlit` warnings, call `run()` before any `st` call, as above.
 ```
 
