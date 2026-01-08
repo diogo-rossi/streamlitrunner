@@ -229,9 +229,6 @@ def run(
         If `func` is not `None`, return its result. Otherwise, returns `None`.
     """
 
-    if kwargs.get("fill_page_content", False):
-        fill_page_content(True, True, True)
-
     if not inside_streamlit_app and not interactively_debugging:
 
         if "STREAMLIT_SERVER_HEADLESS" not in rc:
@@ -301,6 +298,9 @@ def run(
         except KeyboardInterrupt:
             sys.exit()
         sys.exit()
+
+    if kwargs.get("fill_page_content", False):
+        fill_page_content(True, True, True)
 
     if func is not None:
         funcargs = funcargs or []
