@@ -38,6 +38,10 @@ dev = [
     "pytest>=9.0.2",
     "taskipy>=1.14.1",
 ]
+test = [
+    "matplotlib>=3.10.8",
+    "seaborn>=0.13.2",
+]
 
 [tool.pytest.ini_options]
 addopts = "-rx -vv -s --tb=short"
