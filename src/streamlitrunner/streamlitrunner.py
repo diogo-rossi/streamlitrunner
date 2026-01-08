@@ -56,7 +56,7 @@ if inside_streamlit_app:
 class RuntimeConfig(TypedDict, total=False):
     CLOSE_OPENED_WINDOW: bool
     OPEN_AS_APP: bool
-    PRINT_COMMAND: bool
+    PRINT_MSGS: bool
     SCREEN: int | None
     STREAMLIT_GLOBAL_DISABLE_WATCHDOG_WARNING: bool
     STREAMLIT_GLOBAL_DISABLE_WIDGET_STATE_DUPLICATION_WARNING: bool
@@ -124,7 +124,7 @@ class RuntimeConfig(TypedDict, total=False):
 rc: RuntimeConfig = {
     "OPEN_AS_APP": True,
     "CLOSE_OPENED_WINDOW": True,
-    "PRINT_COMMAND": True,
+    "PRINT_MSGS": True,
     "SCREEN": None,
     "STREAMLIT_CLIENT_TOOLBAR_MODE": "minimal",
     "STREAMLIT_SERVER_RUN_ON_SAVE": True,
@@ -146,7 +146,7 @@ def run(
     title: str = "Streamlit runner app",
     maximized: bool = True,
     open_as_app: bool = True,
-    print_command: bool = True,
+    print_msgs: bool = True,
     fill_page_content: bool = False,
     screen: int | None = None,
     **kwargs,
@@ -237,7 +237,7 @@ def run(
                 os.environ[option] = str(rc[option])
 
         server_headless: bool = rc["STREAMLIT_SERVER_HEADLESS"]
-        print_command: bool = rc.get("PRINT_COMMAND", True)
+        print_msgs: bool = rc.get("PRINT_MSGS", True)
         open_as_app: bool = rc.get("OPEN_AS_APP", True)
         server_port: int = rc.get("STREAMLIT_SERVER_PORT", 8501)
         maximized: bool = rc.get("MAXIMIZED", True)
@@ -255,10 +255,10 @@ def run(
 
             command = f'{streamlit} run --server.headless {server_headless} --server.port {server_port} "{Path(sys.argv[0])}" -- {" ".join(sys.argv[1:])}'
 
-            if print_command:
+            if print_msgs:
                 COLUMNS = os.get_terminal_size().columns
                 print("-" * COLUMNS)
-                print("Running command:")
+                print("Streamlit-runner, running command:")
                 print(command)
                 print("-" * COLUMNS)
 

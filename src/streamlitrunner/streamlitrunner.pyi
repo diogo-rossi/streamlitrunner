@@ -8,7 +8,7 @@ from streamlit.runtime.scriptrunner import get_script_run_ctx
 class RuntimeConfig(TypedDict, total=False):
     CLOSE_OPENED_WINDOW: bool
     OPEN_AS_APP: bool
-    PRINT_COMMAND: bool
+    PRINT_MSGS: bool
     STREAMLIT_GLOBAL_DISABLE_WATCHDOG_WARNING: bool
     STREAMLIT_GLOBAL_DISABLE_WIDGET_STATE_DUPLICATION_WARNING: bool
     STREAMLIT_GLOBAL_SHOW_WARNING_ON_DIRECT_EXECUTION: bool
@@ -74,7 +74,7 @@ class RuntimeConfig(TypedDict, total=False):
 rc: RuntimeConfig = {
     "OPEN_AS_APP": True,
     "CLOSE_OPENED_WINDOW": True,
-    "PRINT_COMMAND": True,
+    "PRINT_MSGS": True,
     "STREAMLIT_CLIENT_TOOLBAR_MODE": "minimal",
     "STREAMLIT_SERVER_RUN_ON_SAVE": True,
     "STREAMLIT_SERVER_PORT": 8501,
@@ -89,7 +89,7 @@ def run(
     title: str = "Streamlit runner app",
     maximized: bool = True,
     open_as_app: bool = True,
-    print_command: bool = True,
+    print_msgs: bool = True,
     client_toolbar_mode: Literal["auto", "developer", "viewer", "minimal"] = "minimal",
     fill_page_content: bool = False,
     screen: int | None = None,
