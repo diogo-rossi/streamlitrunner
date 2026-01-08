@@ -63,5 +63,5 @@ def main(a, b, c, d):
 
 
 if __name__ == "__main__":
-    a = sr.run(main, [1, 2], {"c": 3, "d": 4}, screen=1, maximized=False)
+    a = sr.run(main, [1, 2], {"c": 3, "d": 4}, screen=1, fill_page_content=True)
     print(a)
