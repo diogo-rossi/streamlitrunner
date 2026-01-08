@@ -33,7 +33,6 @@ def kill_streamlit(proc: Popen, print_msgs: bool):
         for child in process.children(recursive=True):
             child.kill()
         process.kill()
-        print("App closed")
         if print_msgs:
             COLUMNS = os.get_terminal_size().columns
             print("-" * COLUMNS)
