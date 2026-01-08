@@ -6,11 +6,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-
-import logging
-logging.getLogger("streamlit.runtime.scriptrunner.utils.script_run_context").setLevel(logging.ERROR)
-
-
 def streamlit_charts():
     """Cria gráficos de linha, área e barras interativos"""
     x = np.linspace(0, 4 * np.pi, 40)
@@ -52,8 +47,7 @@ def seaborn_chart():
     st.pyplot(fig)
 
 
-def main():
-    sr.run(screen=1, maximized=False)
+def main(a, b, c, d):
     st.title("7. Gráficos")
     np.random.seed(100)
 
@@ -65,7 +59,9 @@ def main():
     with tab2:
         seaborn_chart()
 
+    return a, b, c, d
+
 
 if __name__ == "__main__":
-    main()
-    
+    a = sr.run(main, [1, 2], {"c": 3, "d": 4}, screen=1, maximized=False)
+    print(a)
