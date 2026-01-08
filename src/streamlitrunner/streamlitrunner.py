@@ -3,7 +3,7 @@ import sys
 from pathlib import Path
 from typing import Literal, TypedDict, overload, Callable, Any, Sequence
 
-import subprocess
+from subprocess import Popen
 import webview
 import psutil
 import socket
@@ -26,7 +26,7 @@ def is_port_in_use(port) -> bool:
         return s.connect_ex(("localhost", port)) == 0
 
 
-def kill_streamlit(proc):
+def kill_streamlit(proc: Popen, print_msgs: bool):
     """Kill given streamlit process"""
     try:
         process = psutil.Process(proc.pid)
@@ -34,6 +34,11 @@ def kill_streamlit(proc):
             child.kill()
         process.kill()
         print("App closed")
+        if print_msgs:
+            COLUMNS = os.get_terminal_size().columns
+            print("-" * COLUMNS)
+            print("Streamlit-runner app closed")
+            print("-" * COLUMNS)
     except:
         raise
 
@@ -262,7 +267,7 @@ def run(
                 print(command)
                 print("-" * COLUMNS)
 
-            proc = subprocess.Popen(command)
+            proc = Popen(command)
 
         try:
             if open_as_app:
@@ -276,7 +281,7 @@ def run(
                     **create_window_kwargs,
                 )
                 webview.start(run_streamlit)
-                kill_streamlit(proc)
+                kill_streamlit(proc, print_msgs)
             else:
                 run_streamlit()
 
