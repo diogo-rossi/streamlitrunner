@@ -350,3 +350,20 @@ def fill_page_content(
 
     if wide_layout:
         st.set_page_config(layout="wide")
+
+
+def show_plotly_fig(
+    fig,
+    maximized: bool = False,
+    fill_page_content: bool = True,
+    screen: int | None = None,
+):
+    run(
+        title="Plotly chart",
+        maximized=maximized,
+        fill_page_content=fill_page_content,
+        screen=screen,
+    )
+    import streamlit as st
+
+    st.plotly_chart(fig)

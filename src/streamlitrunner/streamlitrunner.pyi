@@ -159,3 +159,9 @@ def fill_page_content(
     remove_header_footer: bool = True,
     wide_layout: bool = True,
 ) -> None: ...
+def show_plotly_fig(
+    fig,
+    maximized: bool = False,
+    fill_page_content: bool = True,
+    screen: int | None = None,
+): ...
