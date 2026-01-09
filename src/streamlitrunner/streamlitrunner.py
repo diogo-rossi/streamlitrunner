@@ -357,6 +357,7 @@ def show_plotly_fig(
     maximized: bool = False,
     fill_page_content: bool = True,
     screen: int | None = None,
+    matplotlib_layout: bool = False,
 ):
     run(
         title="Plotly chart",
@@ -365,5 +366,17 @@ def show_plotly_fig(
         screen=screen,
     )
     import streamlit as st
+
+    if matplotlib_layout:
+        fig = (
+            fig.update_layout(
+                template="simple_white",
+                plot_bgcolor="white",
+                height=500,
+                margin=dict(l=50, r=40, t=30, b=0),
+            )
+            .update_xaxes(mirror="allticks", ticks="inside", showgrid=True)
+            .update_yaxes(mirror="allticks", ticks="inside", showgrid=True)
+        )
 
     st.plotly_chart(fig)

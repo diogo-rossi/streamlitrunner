@@ -164,4 +164,5 @@ def show_plotly_fig(
     maximized: bool = False,
     fill_page_content: bool = True,
     screen: int | None = None,
+    matplotlib_layout: bool = False,
 ): ...
