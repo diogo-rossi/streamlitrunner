@@ -2,7 +2,7 @@
 
 ![](./docs/streamlitrunner.png)
 
-A simple way to run Streamlit app as a desktop app
+A simple way to run Streamlit app as a desktop app, using pywebview
 
 ## Installation
 
