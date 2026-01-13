@@ -58,7 +58,6 @@ if inside_streamlit_app:
 
 
 class RuntimeConfig(TypedDict, total=False):
-    CLOSE_OPENED_WINDOW: bool
     OPEN_AS_APP: bool
     PRINT_MSGS: bool
     SCREEN: int | None
@@ -127,7 +126,6 @@ class RuntimeConfig(TypedDict, total=False):
 
 rc: RuntimeConfig = {
     "OPEN_AS_APP": True,
-    "CLOSE_OPENED_WINDOW": True,
     "PRINT_MSGS": True,
     "SCREEN": None,
     "STREAMLIT_CLIENT_TOOLBAR_MODE": "minimal",

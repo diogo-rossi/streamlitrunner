@@ -6,7 +6,6 @@ from typing import Literal, TypedDict, overload, Any, Callable, Sequence
 from streamlit.runtime.scriptrunner import get_script_run_ctx
 
 class RuntimeConfig(TypedDict, total=False):
-    CLOSE_OPENED_WINDOW: bool
     OPEN_AS_APP: bool
     PRINT_MSGS: bool
     STREAMLIT_GLOBAL_DISABLE_WATCHDOG_WARNING: bool
@@ -73,7 +72,6 @@ class RuntimeConfig(TypedDict, total=False):
 
 rc: RuntimeConfig = {
     "OPEN_AS_APP": True,
-    "CLOSE_OPENED_WINDOW": True,
     "PRINT_MSGS": True,
     "STREAMLIT_CLIENT_TOOLBAR_MODE": "minimal",
     "STREAMLIT_SERVER_RUN_ON_SAVE": True,
